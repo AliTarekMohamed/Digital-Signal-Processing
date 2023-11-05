@@ -131,9 +131,6 @@ def Fourier_transform():
             img.append(xValues[i] * np.sin(yValues[i]))
             xOfk.append(real[i] + img[i] * j)
 
-        for i in range(len(xOfk)):
-            print(i)
-
         for n in range (0, N):
             harmonic_value = 0
             for k in range (0, N):
