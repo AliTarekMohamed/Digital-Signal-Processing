@@ -18,7 +18,7 @@ def Fourier_transform():
     sigma = []
 
     signal = filedialog.askopenfilename(
-        initialdir="Lab 4/Test Cases",
+        initialdir="Lab 4",
         title="Which Signal ?",
     )
 
@@ -130,6 +130,9 @@ def Fourier_transform():
             real.append(xValues[i] * np.cos(yValues[i]))
             img.append(xValues[i] * np.sin(yValues[i]))
             xOfk.append(real[i] + img[i] * j)
+
+        for i in range(len(xOfk)):
+            print(i)
 
         for n in range (0, N):
             harmonic_value = 0
