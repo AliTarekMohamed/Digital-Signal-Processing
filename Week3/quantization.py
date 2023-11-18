@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 import numpy as np
-import matplotlib.pyplot as plt
 import QuanTest1 as t1
 import QuanTest2 as t2
 

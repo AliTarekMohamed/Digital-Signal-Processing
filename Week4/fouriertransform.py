@@ -17,6 +17,10 @@ def Fourier_transform():
     phase = []
     sigma = []
 
+    tst_amp1 = [64, 20.9050074380220, 11.3137084989848, 8.65913760233915, 8, -3.14159265358979, 8.65913760233915, 11.3137084989848, 20.9050074380220]
+    tst_phase = [0, 1.96349540849362, 2.35619449019235, 2.74889357189107, -3.14159265358979, -2.74889357189107, -2.35619449019235, -1.96349540849362]
+    tst_amp2 = [1, 3, 5, 7, 9, 11, 13, 15]
+
     signal = filedialog.askopenfilename(
         initialdir="Lab 4",
         title="Which Signal ?",
@@ -40,7 +44,7 @@ def Fourier_transform():
     def writeToTxtFile():
         with open("Week4\polarform.txt", mode="wt") as file:
             for i in range(0, len(amplitude)):
-                file.write(f"{amplitude[i]} {phase[i]}\n")
+                file.write(f"{amplitude[i]} {phase[i]}\n") # Handle the first 3 lines
             file.close()
     
     def DFT():
@@ -62,28 +66,22 @@ def Fourier_transform():
             fund_freq += (2 * np.pi * fs) / N
             sigma.append(fund_freq)
 
+        if (tst.SignalComapreAmplitude(amplitude, tst_amp1)):
+            print("Test case passed successfully")
+        if (tst.SignalComaprePhaseShift(tst_phase, phase)):
+            print("Test case passed successfully")
+
     def new_amp_phase():
+
+        new_amp = amp_mod.get(1.0, "end").split()
+        new_phase = phase_mod.get(1.0, "end").split()
+
         amplitude.clear()
         phase.clear()
 
-        new_amp_str = amp_mod.get(1.0, "end")
-        new_phase_str = phase_mod.get(1.0, "end")
-
-        new_phase = new_phase_str.split()
-        new_amp = new_amp_str.split()
-
-        amplitude.extend(new_amp)
-        phase.extend(new_phase)
-
-        for i in range(len(amplitude)):
-            amplitude[i] = float(amplitude[i])
-            phase[i] = float(phase[i])
-
-        amp_mod.delete(1.0, "end")
-        phase_mod.delete(1.0, "end")
-
-        amp_mod.insert(1.0, amplitude)
-        phase_mod.insert(1.0, phase)
+        for i in range(len(new_amp)):
+            amplitude.append(float(new_amp[i]))
+            phase.append(float(new_phase[i]))
 
         writeToTxtFile()
         plot()
@@ -96,7 +94,7 @@ def Fourier_transform():
         dft[1].set_title("Frequency / Phase")
         plt.show()
 
-    if (chk == 0): # Time Based (DFT)
+    if (chk == 0): # Time Domain (DFT)
         DFT()
 
         # This is a window to allow modification on amplitude and phase shift
@@ -121,11 +119,11 @@ def Fourier_transform():
         writeToTxtFile()
         plot()
 
-    else: # else chk = 1 that means frequency based (IDFT)
+    else: # else chk = 1 that means frequency domain (IDFT)
         real = []
         img = []
         j = 1j
-        
+
         for i in range(N):
             real.append(xValues[i] * np.cos(yValues[i]))
             img.append(xValues[i] * np.sin(yValues[i]))
@@ -135,7 +133,10 @@ def Fourier_transform():
             harmonic_value = 0
             for k in range (0, N):
                 harmonic_value += (1 / N) * xOfk[k] * np.exp((j * 2 * np.pi * n * k) / N)
-            xOfn.append(harmonic_value)
+            xOfn.append(round(np.real(harmonic_value)))
+
+        if (tst.SignalComapreAmplitude(tst_amp2, xOfn)):
+            print("Test case passed successfully")
 
         plt.plot(xOfn)
         plt.xlabel("time")

@@ -21,11 +21,14 @@ class main_window:
             self.window, text="WEEK #3", width="13", height="3", command=self.week3, font=buttonFont)
         self.week4button = Button(
             self.window, text="WEEK #4", width="13", height="3", command=self.week4, font=buttonFont)
+        self.week5button = Button(
+            self.window, text="WEEK #5", width="13", height="3", command=self.week5, font=buttonFont)
 
         self.week1button.place(x=330, y=10)
         self.week2button.place(x=330, y=70)
         self.week3button.place(x=330, y=130)
         self.week4button.place(x=330, y=190)
+        self.week5button.place(x=330, y=250)
     
 
     def week1(self):
@@ -39,6 +42,9 @@ class main_window:
 
     def week4(self):
         subprocess.run(["python", "Week4/week4.py"], check=True)
+    
+    def week5(self):
+        subprocess.run(["python", "Week5/week5.py"], check=True)
 
 def main():
     window = Tk()
