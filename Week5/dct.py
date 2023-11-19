@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 import numpy as np
+from tkinter import ttk
 import comparesignal2 as tst
 
 root = Tk()
@@ -35,15 +36,25 @@ def DCT():
         amplitude.append(np.sqrt(np.power(np.real(dct_values), 2) + np.power(np.imag(dct_values), 2)))
         phase.append(np.arctan2(np.imag(dct_values), np.real(dct_values)))
     
+    table_window = Toplevel(root)
+    table_window.title("DCT")
+    table = ttk.Treeview(table_window, columns=("Phase Shift", "Amplitude"))
+    table.heading("#1", text="Phase Shift")
+    table.heading("#2", text="Amplitude")
+    table.column("#1", width=100)
+    table.column("#2", width=100)
+    for i in range(N):
+        table.insert("", "end", values=(phase[i], amplitude[i]))
+    table.pack()
+
+    # Testing
+    tst.SignalSamplesAreEqual("Lab 5\DCT\DCT_output.txt", amplitude)
+
     m = int(numOfCoeff.get(1.0, "end"))
     with open("Week5\coefficient.txt", mode="wt") as file:
         for i in range(m):
             file.write(f"{phase[i]} {amplitude[i]}\n") # Handle the first 3 lines
         file.close()
-
-    # Testing
-    tst.SignalSamplesAreEqual("Lab 5\DCT\DCT_output.txt", amplitude)
-
 
 frame = Frame(root)
 lf = LabelFrame(frame, text="Number of coefficients to save")
