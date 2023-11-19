@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+import numpy as np
 import matplotlib.pyplot as plt
 import comparesignal2 as tst
 
@@ -24,14 +25,8 @@ def DC_REMOVE():
             parts = line.strip().split()
             ySignal.append(float(parts[1]))
 
-    mean = 0
-
     for i in ySignal:
-        mean += i
-    mean /= len(ySignal)
-
-    for i in ySignal:
-        dc.append(i - mean)
+        dc.append(i - np.average(ySignal))
 
     # Testing
     tst.SignalSamplesAreEqual("Lab 5\Remove DC component\DC_component_output.txt", dc)
