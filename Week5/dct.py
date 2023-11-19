@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
-import numpy as np
 from tkinter import ttk
+import numpy as np
 import comparesignal2 as tst
 
 root = Tk()
@@ -11,7 +11,6 @@ def DCT():
     ySignal = []
     amplitude = []
     phase = []
-    
     
     signal = filedialog.askopenfilename(
     initialdir="Lab 5",
