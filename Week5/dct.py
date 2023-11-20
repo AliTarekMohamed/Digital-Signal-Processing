@@ -9,8 +9,7 @@ root.title("DCT")
 
 def DCT():
     ySignal = []
-    amplitude = []
-    phase = []
+    dct = []
     
     signal = filedialog.askopenfilename(
     initialdir="Lab 5",
@@ -27,32 +26,29 @@ def DCT():
 
     N = len(ySignal)
 
-    for k in range(len(ySignal)):
+    for k in range(N):
         dct_values = 0
-        for n in range(len(ySignal)):
+        for n in range(N):
             dct_values += float(ySignal[n] * np.cos((np.pi / (4 * N)) * ((2 * n) - 1) * ((2 * k) - 1)))
         dct_values *= float(np.sqrt(2 / N))
-        amplitude.append(np.sqrt(np.power(np.real(dct_values), 2) + np.power(np.imag(dct_values), 2)))
-        phase.append(np.arctan2(np.imag(dct_values), np.real(dct_values)))
+        dct.append(dct_values)
     
     table_window = Toplevel(root)
     table_window.title("DCT")
-    table = ttk.Treeview(table_window, columns=("Phase Shift", "Amplitude"))
-    table.heading("#1", text="Phase Shift")
-    table.heading("#2", text="Amplitude")
+    table = ttk.Treeview(table_window, columns=("DCT"))
+    table.heading("#1", text="DCT")
     table.column("#1", width=100)
-    table.column("#2", width=100)
     for i in range(N):
-        table.insert("", "end", values=(phase[i], amplitude[i]))
+        table.insert("", "end", values=(dct[i]))
     table.pack()
 
     # Testing
-    tst.SignalSamplesAreEqual("Lab 5\DCT\DCT_output.txt", amplitude)
+    tst.SignalSamplesAreEqual("Lab 5\DCT\DCT_output.txt", dct)
 
     m = int(numOfCoeff.get(1.0, "end"))
     with open("Week5\coefficient.txt", mode="wt") as file:
         for i in range(m):
-            file.write(f"{phase[i]} {amplitude[i]}\n") # Handle the first 3 lines
+            file.write(f"{dct[i]}\n")
         file.close()
 
 frame = Frame(root)
