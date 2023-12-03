@@ -132,7 +132,8 @@ def Fourier_transform():
         for n in range (0, N):
             harmonic_value = 0
             for k in range (0, N):
-                harmonic_value += (1 / N) * xOfk[k] * np.exp((j * 2 * np.pi * n * k) / N)
+                harmonic_value += xOfk[k] * np.exp((j * 2 * np.pi * n * k) / N)
+            harmonic_value *= (1 / N)
             xOfn.append(round(np.real(harmonic_value)))
 
         if (tst.SignalComapreAmplitude(tst_amp2, xOfn)):
