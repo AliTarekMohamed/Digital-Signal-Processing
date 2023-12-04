@@ -6,7 +6,7 @@ import subprocess
 class main_window:
     def __init__(self, windowroot):
         self.window = windowroot
-        self.window.geometry("750x400")
+        self.window.geometry("750x500")
         self.window.title("Digital Signal Processing")
         self.createWidgets()
 
@@ -25,6 +25,8 @@ class main_window:
             self.window, text="WEEK #5", width="13", height="3", command=self.week5, font=buttonFont)
         self.week6button = Button(
             self.window, text="WEEK #6", width="13", height="3", command=self.week6, font=buttonFont)
+        self.week7button = Button(
+            self.window, text="WEEK #7", width="13", height="3", command=self.week7, font=buttonFont)
 
         self.week1button.place(x=330, y=10)
         self.week2button.place(x=330, y=70)
@@ -32,6 +34,7 @@ class main_window:
         self.week4button.place(x=330, y=190)
         self.week5button.place(x=330, y=250)
         self.week6button.place(x=330, y=310)
+        self.week7button.place(x=330, y=370)
     
 
     def week1(self):
@@ -51,6 +54,9 @@ class main_window:
 
     def week6(self):
         subprocess.run(["python", "Week6/week6.py"], check=True)
+
+    def week7(self):
+        subprocess.run(["python", "Week7/week7.py"], check=True)
 
 def main():
     window = Tk()
