@@ -1,29 +1,27 @@
 from tkinter import *
 from tkinter import filedialog
+import numpy as np
 
 dialog = Tk()
 dialog.title("Time Analysis")
 
 def Time_Analysis():
-    xsignal1 = []
-    xsignal2 = []
     ysignal1 = []
     ysignal2 = []
     correlationsignal = []
-    TimeDelay=0
+    TimeDelay = 0
 
     signal1 = filedialog.askopenfilename(
-        initialdir="Lab 7\Point2 Time analysis", title="Which Signal")
+        initialdir="Lab 7/Point2 Time analysis", title="Which Signal")
 
     signal2 = filedialog.askopenfilename(
-        initialdir="Lab 7\Point2 Time analysis", title="Which Signal")
+        initialdir="Lab 7/Point2 Time analysis", title="Which Signal")
 
     with open(signal1, 'r') as f:
         for i in range(3):
             next(f)
         for line in f:
             parts = line.strip().split()
-            xsignal1.append(int(parts[0]))
             ysignal1.append(float(parts[1]))
 
     with open(signal2, 'r') as f:
@@ -31,7 +29,6 @@ def Time_Analysis():
             next(f)
         for line in f:
             parts = line.strip().split()
-            xsignal2.append(int(parts[0]))
             ysignal2.append(float(parts[1]))
 
     N = len(ysignal1)
@@ -45,12 +42,7 @@ def Time_Analysis():
             value += ysignal1[n] * ysignal2[d]
         correlationsignal.append(value / N)
 
-    maxindex = 0
-    maxvalue = 0
-    for i in correlationsignal:
-        if i >= maxvalue:
-            maxvalue = i
-
+    maxvalue = np.max(correlationsignal)
     maxindex = correlationsignal.index(maxvalue)
     TimeDelay = maxindex / int(Fs.get(1.0, "end"))
     print(TimeDelay)
