@@ -1,11 +1,12 @@
 from tkinter import *
 from tkinter import filedialog
-import Correlation as corr
+import Correlationcomponent as corr
 import numpy as np
 
 root = Tk()
-root.title("Time Analysis")
+root.title("Signal Matching")
 root.geometry("300x200")
+
 
 def Matching():
     signal = []
@@ -13,17 +14,7 @@ def Matching():
     up_avg = []
     down_corr = []
     up_corr = []
-    down1 = []
-    down2 = []
-    down3 = []
-    down4 = []
-    down5 = []
-    up1 = []
-    up2 = []
-    up3 = []
-    up4 = []
-    up5 = []
-    
+
     signal_path = filedialog.askopenfilename(
         initialdir="Lab 7/Point3 Files/Test Signals", title="Which Signal")
 
@@ -48,14 +39,11 @@ def Matching():
     down_corr = corr.correlation(signal, down_avg)
     up_corr = corr.correlation(signal, up_avg)
 
-    if (np.max(up_corr) > np.max(down_corr)):
-        print(f"max down correlation = {np.max(down_corr)}")
-        print(f"max up correlation = {np.max(up_corr)}")
+    if (up_corr > down_corr): # up_corr[0] > down_corr[0]
         print("This signal is up movement")
     else:
-        print(f"max down correlation = {np.max(down_corr)}")
-        print(f"max up correlation = {np.max(up_corr)}")
         print("This signal is down movement")
+
 
 matching = Button(root, width=17, height=3, text="Matching", command=Matching)
 matching.pack(pady=50)
