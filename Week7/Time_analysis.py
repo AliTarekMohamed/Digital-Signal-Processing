@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import filedialog
 import numpy as np
 
-dialog = Tk()
-dialog.title("Time Analysis")
+root = Tk()
+root.title("Time Analysis")
 
 def Time_Analysis():
     ysignal1 = []
@@ -47,8 +47,8 @@ def Time_Analysis():
     TimeDelay = maxindex / int(Fs.get(1.0, "end"))
     print(TimeDelay)
 
-Corrbutton = Button(dialog, width=17, height=3, text="Time Delay", command=Time_Analysis)
-f = Frame(dialog)
+Corrbutton = Button(root, width=17, height=3, text="Time Delay", command=Time_Analysis)
+f = Frame(root)
 lbl = LabelFrame(f, text="Enter Sampling frequency")
 Fs = Text(lbl, width=50, height=2)
 
@@ -56,4 +56,4 @@ f.pack(pady=10)
 Fs.pack()
 lbl.pack()
 Corrbutton.pack(pady=50)
-dialog.mainloop()
+root.mainloop()

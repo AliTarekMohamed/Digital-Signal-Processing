@@ -8,8 +8,6 @@ dialog = Tk()
 dialog.geometry("250x250")
 dialog.title("Smoothing")
 
-# 1,3,5,7,9,11,13,15,17,19
-
 def Smoothing():
     xsignal = []
     ysignal = []

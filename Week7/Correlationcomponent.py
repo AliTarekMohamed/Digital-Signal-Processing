@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def correlation(ysignal1, ysignal2):
     r = []
     correlationsignal = []
