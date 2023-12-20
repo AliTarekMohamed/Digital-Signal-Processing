@@ -39,7 +39,7 @@ def Matching():
     down_corr = corr.correlation(signal, down_avg)
     up_corr = corr.correlation(signal, up_avg)
 
-    if (up_corr > down_corr): # up_corr[0] > down_corr[0]
+    if (up_corr > down_corr):               # up_corr[0] > down_corr[0]               max(up_corr) > max(down_corr)
         print("This signal is up movement")
     else:
         print("This signal is down movement")
