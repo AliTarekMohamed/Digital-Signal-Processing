@@ -145,8 +145,6 @@ def Resampling():
     for i in range(int(((N - 1) / 2) + 1), int(len(result) - ((N - 1) / 2))):
         indices.append(i)
 
-    print(len(indices))
-    print(len(result))
     test(M, L, indices, result)
     plot(ySignal, result)
 

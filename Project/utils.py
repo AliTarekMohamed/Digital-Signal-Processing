@@ -83,9 +83,6 @@ def correlation(ysignal1, ysignal2):
     for j in range(0, N):
         value = 0
         for n in range(0, N):
-            # MUSTN'T APPLY MATCHING ON ZEROS
-            # if (ysignal1[n] == 0):
-            #     continue
             d = n + j
             if (d >= N):
                 d -= N

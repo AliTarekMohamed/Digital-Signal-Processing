@@ -8,14 +8,14 @@ import utils as ut
 
 root = Tk()
 root.title("Practical Task 2")
-root.geometry("500x600")
+root.geometry("500x500")
 
 def Task2():
     result = []
     signal = []
     dct = []
 
-    filter_type = int(Ftypetxt.get(1.0, "end"))
+    filter_type = 1
     fs = int(Fstxt.get(1.0, "end"))
     fs_new = int(Fsnewtxt.get(1.0, "end"))
     transition = int(transitiontxt.get(1.0, "end"))
@@ -111,7 +111,7 @@ def Task2():
         A_avg.append((A1[i] + A2[i] + A3[i] + A4[i] + A5[i]) / 5)
         B_avg.append((B1[i] + B2[i] + B3[i] + B4[i] + B5[i]) / 5)
 
-    ut.Matching(signal, A_avg, B_avg)
+    ut.Matching(dct, A_avg, B_avg)
 
 def plot(orginal, filtered, operation):
     fig, fir = plt.subplots(2, 1, figsize=(6, 8))
@@ -122,9 +122,6 @@ def plot(orginal, filtered, operation):
     plt.show()
 
 frame = Frame(root)
-lable = Label(frame, text="Band Pass = 1, Band Stop = 2")
-Ftypelbl = LabelFrame(frame, text="Filter Type")
-Ftypetxt = Text(Ftypelbl, width=50, height=2)
 Fslbl = LabelFrame(frame, text="Fs")
 Fstxt = Text(Fslbl, width=50, height=2)
 Fsnewlbl = LabelFrame(frame, text="Fs New")
@@ -145,9 +142,6 @@ Ltxt = Text(Llbl, width=50, height=2)
 button = Button(frame, width="17", height="3", text="Upload", command=Task2)
 
 frame.pack()
-lable.pack()
-Ftypelbl.pack()
-Ftypetxt.pack()
 Fslbl.pack()
 Fstxt.pack()
 Fsnewlbl.pack()
